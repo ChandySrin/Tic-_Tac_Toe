@@ -6,7 +6,8 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template("index.html")
-@app.route("/choicesPage", methood=["GET","POST"])
+
+@app.route("/choicesPage", methods=["GET","POST"])
 def choices():
     return render_template("choicesPage.html")
 
