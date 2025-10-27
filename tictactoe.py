@@ -5,10 +5,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    render_template("index.html")
-
-
-
+    return render_template("index.html")
+@app.route("/choicesPage", methood=["GET","POST"])
+def choices():
+    return render_template("choicesPage.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
