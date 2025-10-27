@@ -11,5 +11,9 @@ def home():
 def choices():
     return render_template("choicesPage.html")
 
+@app.route("/player", methods=(["GET","POST"]))
+def player():
+    return render_template("player3x3.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
