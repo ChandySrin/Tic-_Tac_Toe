@@ -215,3 +215,28 @@ main {
 }
 
 /* play 3*3 Page code end*/
+
+/* play 5x5 Page code start*/
+
+#board5x5 {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-gap: 5px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+#board5x5 .cell {
+    background: #17122a;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #333;
+    font-size: 28px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+/* play 5x5 Page code end*/
