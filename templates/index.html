@@ -12,15 +12,16 @@
     <main class="menu">
         <h1>Tic Tac Toe</h1>
         <h3>Select Game Mode</h3>
-
-        <div class="mode-buttons">
-            <button name="game_mode" value="vsComputer" class="mode-btn">
-                <a href="#">👾 Player vs Computer</a>
-            </button>
-            <button name="game_mode" value="vsPlayer" class="mode-btn">
-                <a href="#">👥 Player vs Player</a>
-            </button>
-        </div>
+        <form method="POST">
+            <div class="mode-buttons">
+                <button name="game_mode" value="vsComputer" class="mode-btn">
+                    <a href="/choicesPage">👾 Player vs Computer</a>
+                </button>
+                <button name="game_mode" value="vsPlayer" class="mode-btn">
+                    <a href="/choicesPage">👥 Player vs Player</a>
+                </button>
+            </div>
+        </form>
     </main>
 </body>
 
