@@ -19,5 +19,9 @@ def player():
 def players():
     return render_template("player5x5.html")
 
+@app.route("/player7x7", methods=(["GET","POST"]))
+def player7x7():
+    return render_template("player7x7.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

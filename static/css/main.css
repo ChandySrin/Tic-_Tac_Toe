@@ -240,3 +240,28 @@ main {
     transition: background 0.3s;
 }
 /* play 5x5 Page code end*/
+
+/* play 7x7 Page code start*/
+
+#board7x7 {
+    display: grid;
+    grid-template-columns: repeat(7, 50px);
+    grid-gap: 5px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+#board7x7 .cell {
+    background: #17122a;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #333;
+    font-size: 28px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+/* play 7x7 Page code end*/
