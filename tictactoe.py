@@ -7,21 +7,29 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route("/choicesPage", methods=["GET","POST"])
+@app.route("/P_VS_Pchoices", methods=["GET","POST"])
 def choices():
-    return render_template("choicesPage.html")
+    return render_template("P_VS_Pchoices.html")
+
+@app.route("/P_VS_Cchoices", methods=["GET","POST"])
+def P_VS_Cchoicess():
+    return render_template("P_VS_Cchoices.html") 
 
 @app.route("/player", methods=(["GET","POST"]))
-def player():
+def player3x3():
     return render_template("player3x3.html")
 
 @app.route("/player5x5", methods=(["GET","POST"]))
-def players():
+def player5x5():
     return render_template("player5x5.html")
 
 @app.route("/player7x7", methods=(["GET","POST"]))
 def player7x7():
     return render_template("player7x7.html")
+
+@app.route("/computer7x7")
+def computer7x7():
+    return render_template("computer7x7.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
