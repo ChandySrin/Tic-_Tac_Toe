@@ -66,7 +66,7 @@ function computerMove() {
 
   if (checkWin(computer)) {
     titleHeader.textContent = "Computer Wins!";
-    playSound(winSound);
+    playSound(loseSound);
     gameActive = false;
     boardDiv.style.pointerEvents = "auto";
     return;
