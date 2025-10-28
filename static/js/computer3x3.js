@@ -1,16 +1,16 @@
-const boardDiv = document.getElementById('board7x7');
+const boardDiv = document.getElementById('board');
 const titleHeader = document.getElementById('titleHeader');
 const restartBtn = document.getElementById('restartBtn');
 const winSound = document.getElementById('winSound');
 const tieSound = document.getElementById('tieSound');
 
-let size = 7; // 7x7 grid
-let currentPlayer = "X"; // player always X
+let size = 3;
+let currentPlayer = "X";
 let computer = "O";
 let gameBoard = Array(size * size).fill('');
 let gameActive = true;
 
-// ✅ Create 7x7 board
+// ✅ Create 3x3 board
 function createBoard() {
   boardDiv.innerHTML = '';
   for (let i = 0; i < size * size; i++) {
@@ -46,19 +46,16 @@ function playerMove(index) {
   }
 
   titleHeader.textContent = "Computer's Turn...";
-  boardDiv.style.pointerEvents = "none"; // disable player input
-  setTimeout(computerMove, 800); // small delay
+  boardDiv.style.pointerEvents = "none";
+  setTimeout(computerMove, 600);
 }
 
-// ✅ Computer move (Smart AI)
+// ✅ Smart computer (AI tries to win or block)
 function computerMove() {
-  // Try to win
   let move = findWinningMove(computer);
   if (move === null) {
-    // Try to block player
     move = findWinningMove(currentPlayer);
   }
-  // Otherwise, random move
   if (move === null) {
     const available = gameBoard.map((v, i) => v === '' ? i : null).filter(v => v !== null);
     move = available[Math.floor(Math.random() * available.length)];
@@ -87,41 +84,21 @@ function computerMove() {
   boardDiv.style.pointerEvents = "auto";
 }
 
-// ✅ Update board visually
+// ✅ Update board display
 function updateBoard() {
   document.querySelectorAll('.cell').forEach((cell, i) => {
     cell.textContent = gameBoard[i];
   });
 }
 
-// ✅ Check if player wins (5 in a row for 7x7)
+// ✅ Win check for 3 in a row
 function checkWin(player) {
-  const needed = 5; // 5 in a row to win
-
-  for (let r = 0; r < size; r++) {
-    for (let c = 0; c < size; c++) {
-      if (
-        checkDirection(r, c, 0, 1, player, needed) || // horizontal
-        checkDirection(r, c, 1, 0, player, needed) || // vertical
-        checkDirection(r, c, 1, 1, player, needed) || // diagonal down-right
-        checkDirection(r, c, 1, -1, player, needed)   // diagonal down-left
-      ) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-// Helper: check 5 in a row
-function checkDirection(r, c, dr, dc, player, needed) {
-  for (let i = 0; i < needed; i++) {
-    const row = r + i * dr;
-    const col = c + i * dc;
-    if (row < 0 || col < 0 || row >= size || col >= size) return false;
-    if (gameBoard[row * size + col] !== player) return false;
-  }
-  return true;
+  const winPatterns = [
+    [0,1,2], [3,4,5], [6,7,8], // rows
+    [0,3,6], [1,4,7], [2,5,8], // cols
+    [0,4,8], [2,4,6]           // diagonals
+  ];
+  return winPatterns.some(pattern => pattern.every(i => gameBoard[i] === player));
 }
 
 // ✅ Check tie
@@ -150,7 +127,7 @@ function playSound(audioElement) {
   audioElement.play().catch(err => console.log("Sound Error:", err));
 }
 
-// ✅ Restart button
+// ✅ Restart
 restartBtn.addEventListener('click', () => {
   gameBoard = Array(size * size).fill('');
   gameActive = true;
