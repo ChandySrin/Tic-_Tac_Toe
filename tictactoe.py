@@ -31,5 +31,9 @@ def player7x7():
 def computer7x7():
     return render_template("computer7x7.html")
 
+@app.route("/computer5x5")
+def computer5x5():
+    return render_template("computer5x5.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
