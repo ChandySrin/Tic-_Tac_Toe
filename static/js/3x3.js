@@ -106,3 +106,5 @@ restartBtn.addEventListener('click', () => {
   titleHeader.textContent = 'Choose';
 });
 
+
+
