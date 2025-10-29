@@ -38,6 +38,17 @@ function playerMove(index) {
     return;
   }
 
+
+  if (checkWin()) {
+    titleHeader.textContent = `Player ${currentPlayer} Wins!`;
+    gameActive = false;
+    cells.forEach(cell => cell.style.pointerEvents = 'none');
+    playSound(winSound);
+    boardDiv.classList.add('win-flash'); // add this
+    return;
+  }
+
+
   if (checkTie()) {
     titleHeader.textContent = "It's a Tie!";
     playSound(tieSound);
@@ -94,9 +105,9 @@ function updateBoard() {
 // ✅ Win check for 3 in a row
 function checkWin(player) {
   const winPatterns = [
-    [0,1,2], [3,4,5], [6,7,8], // rows
-    [0,3,6], [1,4,7], [2,5,8], // cols
-    [0,4,8], [2,4,6]           // diagonals
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // cols
+    [0, 4, 8], [2, 4, 6]           // diagonals
   ];
   return winPatterns.some(pattern => pattern.every(i => gameBoard[i] === player));
 }
@@ -133,3 +144,28 @@ restartBtn.addEventListener('click', () => {
   gameActive = true;
   createBoard();
 });
+
+
+function launchConfetti() {
+  var duration = 3 * 1000;
+  var end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 5,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 5,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+}
