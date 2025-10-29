@@ -5,6 +5,8 @@ const cells = document.querySelectorAll('.cell');
 const restartBtn = document.getElementById('restartBtn');
 const winSound = document.getElementById('winSound');
 const tieSound = document.getElementById('tieSound');
+const clickSound = document.getElementById('clickSound');
+
 let currentPlayer = null;
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let gameActive = false;
@@ -49,14 +51,22 @@ function handleCellClick(index) {
 
   gameBoard[index] = currentPlayer;
   cells[index].textContent = currentPlayer;
+  // playSound(clickSound)
+
 
   if (checkWin()) {
-    titleHeader.textContent = `Player ${currentPlayer} Wins!`;
-    gameActive = false;
-    cells.forEach(cell => cell.style.pointerEvents = 'none');
-    playSound(winSound); // Play win sound
-    return;
-  }
+  titleHeader.textContent = `🎉 Player ${currentPlayer} Wins! 🎉`;
+  gameActive = false;
+  cells.forEach(cell => cell.style.pointerEvents = 'none');
+  playSound(winSound); // Play win sound
+
+  // 🎉 Add winner flash & confetti
+  document.querySelector('main').classList.add('win-flash');
+  launchConfetti();
+
+  return;
+}
+
 
   if (checkTie()) {
     titleHeader.textContent = "It's a Tie!";
@@ -107,4 +117,25 @@ restartBtn.addEventListener('click', () => {
 });
 
 
+
+function launchConfetti() {
+  const duration = 2 * 1000; // 2 seconds
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 6,
+      startVelocity: 20,
+      spread: 360,
+      ticks: 60,
+      origin: {
+        x: Math.random(),
+        y: Math.random() - 0.2
+      }
+    });
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+}
 
