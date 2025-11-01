@@ -28,6 +28,8 @@ createBoard();
 function playerMove(index) {
   if (!gameActive || gameBoard[index] !== '') return;
 
+  playSound(clickSound);
+
   gameBoard[index] = currentPlayer;
   updateBoard();
 
@@ -63,6 +65,8 @@ function computerMove() {
     const available = gameBoard.map((v, i) => v === '' ? i : null).filter(v => v !== null);
     move = available[Math.floor(Math.random() * available.length)];
   }
+
+  playSound(clickSound);
 
   gameBoard[move] = computer;
   updateBoard();
@@ -156,3 +160,24 @@ restartBtn.addEventListener('click', () => {
   gameActive = true;
   createBoard();
 });
+
+function launchConfetti() {
+  const duration = 2 * 1000; // 2 seconds
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 6,
+      startVelocity: 20,
+      spread: 360,
+      ticks: 60,
+      origin: {
+        x: Math.random(),
+        y: Math.random() - 0.2
+      }
+    });
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+}

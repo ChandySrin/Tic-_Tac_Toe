@@ -41,6 +41,8 @@ function startGame(player) {
 function handleCellClick(index) {
   if (!gameActive || gameBoard[index] !== '') return;
 
+  playSound(clickSound)
+
   gameBoard[index] = currentPlayer;
   boardDiv.children[index].textContent = currentPlayer;
 
@@ -48,6 +50,8 @@ function handleCellClick(index) {
     titleHeader.textContent = `🎉 Player ${currentPlayer} Wins!🎉`;
     gameActive = false;
     playSound(winSound);
+    
+    launchConfetti();
 
     // 🎉 Add winner flash & confetti
     document.querySelector('main').classList.add('win-flash');

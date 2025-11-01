@@ -2,7 +2,9 @@ const boardDiv = document.getElementById('board');
 const titleHeader = document.getElementById('titleHeader');
 const restartBtn = document.getElementById('restartBtn');
 const winSound = document.getElementById('winSound');
+const loseSound = document.getElementById('loseSound');
 const tieSound = document.getElementById('tieSound');
+const clickSound = document.getElementById('clickSound');
 
 let size = 3;
 let currentPlayer = "X";
@@ -28,12 +30,15 @@ createBoard();
 function playerMove(index) {
   if (!gameActive || gameBoard[index] !== '') return;
 
+  playSound(clickSound);
+
   gameBoard[index] = currentPlayer;
   updateBoard();
 
   if (checkWin(currentPlayer)) {
-    titleHeader.textContent = "You Win!";
+    titleHeader.textContent = "You Win! 🎉";
     playSound(winSound);
+    launchConfetti();
     gameActive = false;
     return;
   }
@@ -72,11 +77,13 @@ function computerMove() {
     move = available[Math.floor(Math.random() * available.length)];
   }
 
+  playSound(clickSound);
+
   gameBoard[move] = computer;
   updateBoard();
 
   if (checkWin(computer)) {
-    titleHeader.textContent = "Computer Wins!";
+    titleHeader.textContent = "💀Computer Wins!";
     playSound(loseSound);
     gameActive = false;
     boardDiv.style.pointerEvents = "auto";

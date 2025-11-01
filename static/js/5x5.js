@@ -5,11 +5,14 @@ const boardDiv = document.getElementById('board5x5');
 const restartBtn = document.getElementById('restartBtn');
 const winSound = document.getElementById('winSound');
 const tieSound = document.getElementById('tieSound');
+const clickSound = document.getElementById('clickSound');
+
 
 let currentPlayer = null;
 let gameBoard = [];
 let gameActive = false;
 const size = 5; // 5x5 board
+const winLength = 4;
 
 // Start game with player selection
 xPlayer.addEventListener('click', () => startGame('X'));
@@ -41,6 +44,8 @@ function startGame(player) {
 function handleCellClick(index) {
   if (!gameActive || gameBoard[index] !== '') return;
 
+  playSound(clickSound)
+
   gameBoard[index] = currentPlayer;
   boardDiv.children[index].textContent = currentPlayer;
 
@@ -48,6 +53,8 @@ function handleCellClick(index) {
     titleHeader.textContent = `🎉 Player ${currentPlayer} Wins! 🎉`;
     gameActive = false;
     playSound(winSound);
+
+    launchConfetti();
 
     // 🎉 Add winner flash & confetti
     document.querySelector('main').classList.add('win-flash');

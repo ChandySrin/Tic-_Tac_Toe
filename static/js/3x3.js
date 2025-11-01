@@ -49,23 +49,26 @@ cells.forEach((cell, index) => {
 function handleCellClick(index) {
   if (!gameActive || gameBoard[index] !== '') return;
 
+
+  playSound(clickSound)
+
   gameBoard[index] = currentPlayer;
   cells[index].textContent = currentPlayer;
-  // playSound(clickSound)
-
 
   if (checkWin()) {
-  titleHeader.textContent = `🎉 Player ${currentPlayer} Wins! 🎉`;
-  gameActive = false;
-  cells.forEach(cell => cell.style.pointerEvents = 'none');
-  playSound(winSound); // Play win sound
+    titleHeader.textContent = `🎉 Player ${currentPlayer} Wins! 🎉`;
+    gameActive = false;
+    cells.forEach(cell => cell.style.pointerEvents = 'none');
+    playSound(winSound); // Play win sound
 
-  // 🎉 Add winner flash & confetti
-  document.querySelector('main').classList.add('win-flash');
-  launchConfetti();
+    launchConfetti();
 
-  return;
-}
+    // 🎉 Add winner flash & confetti
+    document.querySelector('main').classList.add('win-flash');
+    launchConfetti();
+
+    return;
+  }
 
 
   if (checkTie()) {
@@ -119,7 +122,7 @@ restartBtn.addEventListener('click', () => {
 
 
 function launchConfetti() {
-  const duration = 2 * 1000; // 2 seconds
+  const duration = 3 * 1000; // 2 seconds
   const end = Date.now() + duration;
 
   (function frame() {
