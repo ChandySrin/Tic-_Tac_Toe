@@ -222,7 +222,11 @@ main {
 
 #restartBtn:hover {
     background: #2A2343;
-    
+
+}
+
+.backs {
+    margin-top: 20px;
 }
 
 /* play 3*3 Page code end*/
@@ -295,13 +299,90 @@ main {
 
 /* 🎉 Flash animation when someone wins */
 .win-flash {
-  animation: flashWin 0.4s ease-in-out 8;
-} 
+    animation: flashWin 0.4s ease-in-out 8;
+}
 
 @keyframes flashWin {
-  0% { background-color: #4a7be6; }
-  50% { background-color: rgba(10, 48, 91, 0.497); }
-  100% { background-color: #1496d2; }
-} 
+    0% {
+        background-color: #4a7be6;
+    }
 
+    50% {
+        background-color: rgba(10, 48, 91, 0.497);
+    }
 
+    100% {
+        background-color: #1496d2;
+    }
+}
+
+@media (max-width: 478px) {
+
+    .title {
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(36, 3, 3, 0.3);
+
+    }
+
+    .grid-options {
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .grid-btn {
+        padding: 1rem;
+        min-width: 80px;
+    }
+
+    .grid-size {
+        font-size: 1.2rem;
+    }
+
+    .grid-preview {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 478px) {
+
+    #header {
+        width: 310px;
+        align-items: center;
+    }
+    #header .player {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        margin-bottom: 10px;
+        opacity: 0.8;
+    }
+    #header .player-active {
+        opacity: 1;
+        border: solid 3px #2A2343;
+    }
+
+    #header .player:hover {
+        border: solid 3px #2A2343;
+    }
+    #board {
+        grid-template-columns: repeat(3, 80px); 
+        grid-gap: 4px;
+    }
+
+    #board .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;  
+    }
+    #restartBtn {
+        width: 180px;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .backs {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+}

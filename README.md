@@ -41,3 +41,16 @@
     - Desktop
     - Tablets
     - Mobile phones
+
+# ScreenShot
+* Homepage
+
+![Homepage](static/images/Homepage.png)
+
+* Choosepage
+
+![Choosepage](static/images/Choose.png)
+
+* GameBoard
+
+![Board](static/images/GameBoard.png)
